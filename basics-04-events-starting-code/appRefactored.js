@@ -3,8 +3,27 @@ const app = Vue.createApp({
         return {
             counter: 0,
             name: "",
+            lastName: "",
             confirmedName: ""
         };
+    },
+    watch:{
+        counter(value){
+            if(value>50)
+                this.counter= 0;
+        },
+        /*name(value){
+            this.fullName = value === ""?" ":value +" "+this.lastName;
+        },
+        lastName(value){
+            this.fullName = value === ""?" ":this.name +" " +value;
+        }*/
+    },
+    computed:{
+        fullName(){
+            console.log("Again");
+            return this.name==="" || this.lastName?" ": this.name + " "+ this.lastName;
+        }
     },
     methods: {
         add(number) {
@@ -14,9 +33,9 @@ const app = Vue.createApp({
             this.counter -= number;
         },
         setName(event, lastName) {
-            this.name = event.target.value + " " + lastName;
+            this.name = event.target.value;
         },
-        resetName(event, lastName) {
+        resetName() {
             this.name = "";
         },
         submitForm(event) {
